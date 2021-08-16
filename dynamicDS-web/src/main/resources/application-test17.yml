@@ -1,0 +1,150 @@
+server:
+  port: 8209
+  error:
+    include-stacktrace: "always"
+
+dubbo:
+  application:
+    id: ${spring.application.name}-dubbo
+    name: ${spring.application.name}-dubbo
+  protocol:
+    id: dubbo
+    name: dubbo
+    port: 20799
+    host: 10.160.103.176
+  registry:
+    id: ${spring.application.name}-registry
+    address: zookeeper://10.162.4.17:2181
+  timeout: 10000
+  reference:
+    check: false
+  rpc-msg:
+    group: MSG
+    version: 1.0.0
+
+
+spring:
+  redis:
+    host: xxxxxxxxxxx
+    password: xxxxxxx
+    database: 1
+    port: 6379
+    timeout: 30000
+    lettuce:
+      pool:
+        max-idle: 16
+        min-idle: 8
+        max-active: 16
+        max-wait: 3000
+  datasource:
+    druid:
+      stat-view-servlet:
+        allow: "127.0.0.1,192.168.163.1"
+        login-username: "root"
+        enabled: "true"
+        deny: "192.168.10.1"
+        login-password: "root"
+      filter:
+        stat:
+          enabled: "true"
+          merge-sql: "true"
+          slow-sql-millis: "10000"
+          log-slow-sql: "true"
+        wall:
+          enabled: "true"
+      maxPoolPreparedStatementPerConnectionSize: "20"
+      web-stat-filter:
+        profile-enable: "true"
+        exclusions: "*.js,*.gif,*.jpg,*.bmp,*.png,*.css,*.ico,/druid/*"
+        session-stat-enable: "true"
+        enabled: "true"
+        url-pattern: "/*"
+      connectionProperties: "druid.stat.mergeSql=true;druid.stat.slowSqlMillis=500"
+      aop-patterns: "com.druid.*"
+      useGlobalDataSourceStat: "true"
+    dynamic:
+      datasource:
+        oracledb:
+          druid:
+            initial-size: "5"
+            filters: "stat,wall,log4j2"
+            time-between-eviction-runs-millis: "60000"
+            max-wait: "60000"
+            validation-query-timeout: "-1"
+            max-evictable-idle-time-millis: "300000"
+            max-active: "20"
+            min-idle: "5"
+            min-evictable-idle-time-millis: "300000"
+            pool-prepared-statements: "true"
+            test-while-idle: "true"
+            test-on-return: "false"
+            validation-query: "SELECT 1 FROM DUAL"
+            test-on-borrow: "false"
+            share-prepared-statements: "true"
+          driver-class-name: "oracle.jdbc.OracleDriver"
+          url: "jdbc:oracle:thin:@xxxxxxxxxxxxxxx:1521/test"
+          username: "xxxxxxx"
+          password: "xxxxxxx"
+          type: "com.alibaba.druid.pool.DruidDataSource"
+        goodsdb:
+          druid:
+            pool-prepared-statements: "true"
+            min-idle: "5"
+            test-on-return: "false"
+            max-active: "20"
+            test-on-borrow: "false"
+            validation-query: "select 1"
+            initial-size: "5"
+            time-between-eviction-runs-millis: "60000"
+            filters: "stat,wall,log4j2"
+            max-evictable-idle-time-millis: "300000"
+            share-prepared-statements: "true"
+            min-evictable-idle-time-millis: "300000"
+            max-wait: "60000"
+            test-while-idle: "true"
+            validation-query-timeout: "-1"
+          username: "root"
+          url: "jdbc:mysql://xxxxxxxxxxxxxxx:3306/mobile4?useSSL=false&useUnicode=true&characterEncoding=UTF-8"
+          driver-class-name: "com.mysql.cj.jdbc.Driver"
+          type: "com.alibaba.druid.pool.DruidDataSource"
+          password: "654321"
+        orderdb:
+          driver-class-name: "com.mysql.cj.jdbc.Driver"
+          type: "com.alibaba.druid.pool.DruidDataSource"
+          druid:
+            test-while-idle: "true"
+            initial-size: "5"
+            share-prepared-statements: "true"
+            filters: "stat,wall,log4j2"
+            time-between-eviction-runs-millis: "60000"
+            test-on-return: "false"
+            max-evictable-idle-time-millis: "300000"
+            test-on-borrow: "false"
+            min-evictable-idle-time-millis: "300000"
+            max-wait: "60000"
+            validation-query-timeout: "-1"
+            validation-query: "select 1"
+            min-idle: "5"
+            pool-prepared-statements: "true"
+            max-active: "20"
+          password: "654321"
+          username: "root"
+          url: "jdbc:mysql://xxxxxxxxxxx:3306/ifbc_msg?useSSL=false&useUnicode=true&characterEncoding=UTF-8"
+      primary: "orderdb"
+  application:
+    name: "dynamic"
+mybatis:
+  type-aliases-package: "com.example.demo.mapper"
+  mapper-locations: "classpath:/mapper/*Mapper.xml"
+  configuration:
+    log-impl: "org.apache.ibatis.logging.stdout.StdOutImpl"
+logging:
+  config: "classpath:log4j2.xml"
+  level:
+    org:
+      springframework:
+        web: "trace"
+
+
+
+

@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.multidruiddynamic.dymsg.mapper.oracledb.UcUserInfoMapper">
+    <resultMap id="UserInfoMap" type="com.multidruiddynamic.dymsg.pojo.UcUserInfo">
+        <result column="UUI_USERID" property="userId" jdbcType="VARCHAR"/>
+        <result column="UUI_MOBILENO" property="mobileNo" jdbcType="VARCHAR"/>
+        <result column="BANK_CUSTNO" property="ecifCustNo" jdbcType="VARCHAR"/>
+        <result column="UUI_NICKNAME" property="nickName" jdbcType="VARCHAR"/>
+        <result column="UUI_USER_LEVEL" property="userLevel" jdbcType="VARCHAR"/>
+        <result column="UUI_RGST_TM" property="registDate" jdbcType="VARCHAR"/>
+        <result column="UUI_RGST_BRANCHNO" property="userRegistCom" jdbcType="VARCHAR"/>
+        <result column="UUI_TELLERNO" property="tellerNo" jdbcType="VARCHAR"/>
+        <result column="UUI_STATUS" property="userStt" jdbcType="CHAR"/>
+        <result column="UUI_USER_TYPE" property="userType" jdbcType="VARCHAR"/>
+        <result column="UUI_CERTIFIC_FLAG" property="certificFlag" jdbcType="VARCHAR"/>
+        <result column="UUI_CERTIFIC_TM" property="certificTM" jdbcType="VARCHAR"/>
+        <result column="UUI_H5_REG" property="reg_h5_channel" jdbcType="VARCHAR"/>
+        <result column="UUI_H5_SRC" property="reg_h5_source" jdbcType="VARCHAR"/>
+    </resultMap>
+
+
+    <!-- 查询用户信息 -->
+    <select id="selectOneUser" resultMap="UserInfoMap">
+        SELECT
+        UUI_CERTIFIC_FLAG,
+        UUI_CERTIFIC_TM,
+        BANK_CUSTNO,
+        UUI_NICKNAME,
+        UUI_MOBILENO,
+        UUI_USER_LEVEL,
+        UUI_STATUS,
+        UUI_USER_TYPE,
+        UUI_RGST_TM,
+        UUI_RGST_BRANCHNO,
+        UUI_TELLERNO,
+        UUI_H5_REG,
+        UUI_H5_SRC
+        FROM
+        UC_USER_INFO
+        WHERE
+        UUI_USERID=#{userId}
+    </select>
+
+
+</mapper>        

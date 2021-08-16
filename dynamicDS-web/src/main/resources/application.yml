@@ -1,0 +1,5 @@
+spring:
+  application:
+    name: dynamicDemo
+  profiles:
+    active: test17
